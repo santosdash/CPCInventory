@@ -20,6 +20,7 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <%--<link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">--%>
     <link href="lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="lib/css/custom.css" rel="stylesheet" />
     <!-- iCheck -->
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
@@ -73,6 +74,9 @@
             $("#generalAlert .modal-body").html(body);
             $("#generalAlert").modal("show");
             return;
+        }
+        function tryTransaction(opt) {
+            if (opt == 1) saveTransaction(txtDate.value, lblUser.innerHTML, cmbLocation.value, cmbItem.value, cmbTransaction.value, cmbDealer.value, txtQuantity.value);
         }
     </script>
 </head>
@@ -329,15 +333,15 @@
                             <i class="fa fa-refresh"></i>
                         </button>
                         <button type="button" id="btnSave" class="btn-lg btn" data-gloss="Save" style="margin-top: -20px; color: indigo"
-                            onclick="saveTransaction();">
+                            onclick="tryTransaction(1);">
                             <i class="fas fa-save"></i>
                         </button>
                         <button type="button" id="btnEdit" class="btn-lg btn" data-gloss="Edit" style="margin-top: -20px; color: indigo"
-                            onclick="EditTransaction();">
+                            onclick="tryTransaction(2);">
                             <i class="fa fa-pencil-square"></i>
                         </button>
                         <button type="button" id="btnDelete" class="btn-lg btn" data-gloss="Delete" style="margin-top: -20px; color: indigo"
-                            onclick="DeleteTransaction();">
+                            onclick="tryTransaction(3);">
                             <i class="fa fa-trash"></i>
                         </button>
                     </div>

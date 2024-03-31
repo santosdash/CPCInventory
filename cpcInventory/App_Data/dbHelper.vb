@@ -4,15 +4,15 @@ Imports MySql.Data.MySqlClient
 
 
 Public Class dbHelper
-    Public Shared SQLConnection_String_QAS As String = "server=127.0.0.1;uid=root;pwd=root;database=cpcinventory"
-    'Public Shared SQLConnection_String_QAS As String = ConfigurationManager.AppSettings("SQLConnection")
-    Public Shared SQLConnection_String_POD As String = ""
+    'Public Shared SQLConnection_String_QAS As String = "server=127.0.0.1;uid=root;pwd=root;database=cpcinventory"
+    'Public Shared SQLConnection_String_QAS As String = ConfigurationManager.AppSettings("SQLConnectionQ")
+    'Public Shared SQLConnection_String_POD As String = ""
     Public Shared errorMessage As String = ""
 
     Public Shared Function SelectData_Parameter(ByVal cmd As MySqlCommand) As DataTable
         Dim Result As DataTable = New DataTable
 
-        Dim con As New MySqlConnection(IIf(ConfigurationManager.AppSettings("appEnv") = "P", SQLConnection_String_POD, SQLConnection_String_QAS))
+        Dim con As New MySqlConnection(IIf(ConfigurationManager.AppSettings("appEnv") = "P", ConfigurationManager.AppSettings("SQLConnectionP"), ConfigurationManager.AppSettings("SQLConnectionQ")))
         Dim sda As New MySqlDataAdapter
         cmd.CommandType = CommandType.Text
         cmd.Connection = con
@@ -36,7 +36,7 @@ Public Class dbHelper
         Dim Result As String = ""
         Dim reGen_SQL As String = ""
         Try
-            Dim con As New MySqlConnection(IIf(ConfigurationManager.AppSettings("appEnv") = "P", SQLConnection_String_POD, SQLConnection_String_QAS))
+            Dim con As New MySqlConnection(IIf(ConfigurationManager.AppSettings("appEnv") = "P", ConfigurationManager.AppSettings("SQLConnectionP"), ConfigurationManager.AppSettings("SQLConnectionQ")))
             Dim sda As New MySqlDataAdapter
             cmd.CommandType = CommandType.Text
             cmd.Connection = con

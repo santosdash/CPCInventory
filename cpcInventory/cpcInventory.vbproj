@@ -208,6 +208,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="libman.json" />
+    <Content Include="lib\css\custom.css" />
     <Content Include="lib\css\tooltip.css" />
     <Content Include="lib\font-awesome\css\all.css" />
     <Content Include="lib\font-awesome\css\all.min.css" />

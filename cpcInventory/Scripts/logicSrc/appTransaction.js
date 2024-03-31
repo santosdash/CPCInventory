@@ -21,42 +21,42 @@
             request.setRequestHeader("dataType", "json");
             request.onreadystatechange = function () {
                 if (request.readyState == 4 && request.status == 200) {
-                    document.getElementById("lblItemGroup").innerHTML = "Group : ";
-                    document.getElementById("lblItemSubGroup").innerHTML = "Sub Group : ";
-                    document.getElementById("lblItem").innerHTML = "Item : ";
-                    document.getElementById("lblItemMake").innerHTML = "Make : ";
-                    document.getElementById("lblUOM").innerHTML = "UOM : ";
-                    document.getElementById("lblHSN").innerHTML = "HSN Code : ";
-                    document.getElementById("lbllStuck").innerHTML = "Location Stock : ";
-                    document.getElementById("lbltStuck").innerHTML = "Total Stock : ";
-                    document.getElementById("lblPurchased").innerHTML = "Purchased : ";
-                    document.getElementById("lbldStuck").innerHTML = "Dealer/Store Stock : ";
+                    document.getElementById("lblItemGroup").innerHTML = "";
+                    document.getElementById("lblItemSubGroup").innerHTML = "";
+                    document.getElementById("lblItem").innerHTML = "";
+                    document.getElementById("lblItemMake").innerHTML = "";
+                    document.getElementById("lblUOM").innerHTML = "";
+                    document.getElementById("lblHSN").innerHTML = "";
+                    //document.getElementById("lbllStuck").innerHTML = "";
+                    //document.getElementById("lbltStuck").innerHTML = "";
+                    //document.getElementById("lblPurchased").innerHTML = "";
+                    //document.getElementById("lbldStuck").innerHTML = "";
                     var json = this.responseText;
                     var obj = JSON.parse(json).d;
                     var count = Object.keys(obj).length;
                     try {
                         if (count == 0) {
-                            document.getElementById("lblItemGroup").innerHTML = "Group : ";
-                            document.getElementById("lblItemSubGroup").innerHTML = "Sub Group : ";
-                            document.getElementById("lblItem").innerHTML = "Item : ";
-                            document.getElementById("lblItemMake").innerHTML = "Make : ";
-                            document.getElementById("lblUOM").innerHTML = "UOM : ";
-                            document.getElementById("lblHSN").innerHTML = "HSN Code : ";
-                            document.getElementById("lbllStuck").innerHTML = "Location Stock : ";
-                            document.getElementById("lbltStuck").innerHTML = "Total Stock : ";
-                            document.getElementById("lblPurchased").innerHTML = "Purchased : ";
-                            document.getElementById("lbldStuck").innerHTML = "Dealer/Store Stock : ";
+                            document.getElementById("lblItemGroup").innerHTML = "";
+                            document.getElementById("lblItemSubGroup").innerHTML = "";
+                            document.getElementById("lblItem").innerHTML = "";
+                            document.getElementById("lblItemMake").innerHTML = "";
+                            document.getElementById("lblUOM").innerHTML = "";
+                            document.getElementById("lblHSN").innerHTML = "";
+                            //document.getElementById("lbllStuck").innerHTML = "";
+                            //document.getElementById("lbltStuck").innerHTML = "";
+                            //document.getElementById("lblPurchased").innerHTML = "";
+                            //document.getElementById("lbldStuck").innerHTML = "";
                         } else {
-                            document.getElementById("lblItemGroup").innerHTML = "Group : " + obj[0]['itemGroup'];
-                            document.getElementById("lblItemSubGroup").innerHTML = "Sub Group : " + obj[0]['itemSubGroup'];
-                            document.getElementById("lblItem").innerHTML = "Item : " + obj[0]['itemDesc'];
-                            document.getElementById("lblItemMake").innerHTML = "Make : " + obj[0]['itemMake'];
-                            document.getElementById("lblUOM").innerHTML = "UOM : " + obj[0]['itemUOM'];
-                            document.getElementById("lblHSN").innerHTML = "HSN Code : " + obj[0]['itemHSN'];
-                            document.getElementById("lbllStuck").innerHTML = "Location Stock : " + obj[0]['itemLStock'];
-                            document.getElementById("lbltStuck").innerHTML = "Total Stock : " + obj[0]['itemTStock'];
-                            document.getElementById("lblPurchased").innerHTML = "Purchased : " + obj[0]['itemPurchased'];
-                            document.getElementById("lbldStuck").innerHTML = "Dealer/Store Stock : " + obj[0]['itemDStock'];
+                            document.getElementById("lblItemGroup").innerHTML = obj[0]['itemGroup'];
+                            document.getElementById("lblItemSubGroup").innerHTML = obj[0]['itemSubGroup'];
+                            document.getElementById("lblItem").innerHTML = obj[0]['itemDesc'];
+                            document.getElementById("lblItemMake").innerHTML = obj[0]['itemMake'];
+                            document.getElementById("lblUOM").innerHTML = obj[0]['itemUOM'];
+                            document.getElementById("lblHSN").innerHTML = obj[0]['itemHSN'];
+                            //document.getElementById("lbllStuck").innerHTML = "Location Stock : " + obj[0]['itemLStock'];
+                            //document.getElementById("lbltStuck").innerHTML = "Total Stock : " + obj[0]['itemTStock'];
+                            //document.getElementById("lblPurchased").innerHTML = "Purchased : " + obj[0]['itemPurchased'];
+                            //document.getElementById("lbldStuck").innerHTML = "Dealer/Store Stock : " + obj[0]['itemDStock'];
                         }
                     } catch (e) {
                         jRes = 1;
@@ -77,8 +77,7 @@
 }
 function saveTransaction(trnDate, crUser, locationCode, itemCode, trnType, trnDealer, trnQty) {
     var jRes = 0;
-    var request;
-
+    
     if (locationCode <= 0) {
         genMessage('Error', "Please check location and try again")
         return;
@@ -122,7 +121,7 @@ function saveTransaction(trnDate, crUser, locationCode, itemCode, trnType, trnDe
                     if (finalMsg === 'Success') {
                         msgTitle = "Save";
                         finalMsg = "Transaction save successfully"
-                        releaseControls();
+                        //releaseControls();
                     } else {
                         msgTitle = "Error";
                     }
@@ -287,7 +286,15 @@ function releaseControls() {
     document.getElementById("txtQuantity").value = "";
 }
 function inboundTransaction() {    
-    if (Number(document.getElementById("cmbTransaction").value)==2) document.getElementById("cmbDealer").value = 0;
+    //if (Number(document.getElementById("cmbTransaction").value)==2) document.getElementById("cmbDealer").value = 0;
+
+    if (Number(document.getElementById("cmbTransaction").value) == 1 || Number(document.getElementById("cmbTransaction").value) == 3) {
+        fillDropdown_cmbLocation('cmbLocation', document.getElementById("userGroup").value);
+    }
+    if (Number(document.getElementById("cmbTransaction").value) == 2) {
+        fillDropdown_cmbDealer('cmbDealer');
+    }
+    
 }
 function locationChange() {
     document.getElementById("cmbDealer").value = 0;
